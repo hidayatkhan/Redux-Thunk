@@ -1,12 +1,21 @@
 import store from '../store';
-
-
-    export const fetch_post=()=>{
-        return{
+export const fetch_post=()=>{
+return{
             type:"FETCH_USER"
         };
     };
     
+    export const show_details=()=>{
+
+        return{
+            type:"SHOW_DETAILS"
+        }
+    } 
+    export const list_user=()=>{
+        return {
+            type:"LIST_USER"
+        };
+    };
     export const recieve_post = post =>{
 
      return{
@@ -14,13 +23,11 @@ import store from '../store';
         data:post
      };   
     };
-    export const recieve_error= ()=>{
-
-        return{
-            type:"RECIEVE_ERROR"
+    export const recieve_error= ()=>{        
+    return{
+       type:"RECIEVE_ERROR"
         };
     };
-
     export const thunk_action_creator = username=>{
         const user =username.replace(/\s/g, "");
         store.dispatch(fetch_post());

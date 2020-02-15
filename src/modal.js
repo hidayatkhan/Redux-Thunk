@@ -1,31 +1,59 @@
-import React from 'react';
+import React from "react";
+import {Card,ListGroup, ListGroupItem} from 'react-bootstrap'
 
-//import './Modal.css';
+import { Modal, Button } from "react-bootstrap";
 
-const modal = (props) => {
+class ModalExample extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openModal: false
+    };
+  }
+  closeModal = () => this.setState({ openModal: false });
+  openModal = () => {
+    this.setState({ openModal: true });
+  };
+
+  render() {
+    /*    let saveAndClose = () => {
+             api.saveData()
+            .then(() => this.setState({ open: false }))
+            }
+        */
     return (
-        <div>
-            <div className="modal-wrapper"
-                style={{
-                    transform: props.show ? 'translateY(0vh)' : 'translateY(-100vh)',
-                    opacity: props.show ? '1' : '0'
-                }}>
-                <div className="modal-header">
-                    <h3>Modal Header</h3>
-                    <span className="close-modal-btn" onClick={props.close}>×</span>
-                </div>
-                <div className="modal-body">
-                    <p>
-                        {props.children}
-                    </p>
-                </div>
-                <div className="modal-footer">
-                    <button className="btn-cancel" onClick={props.close}>CLOSE</button>
-                    <button className="btn-continue">CONTINUE</button>
-                </div>
-            </div>
-        </div>
-    )
-}
+      <div>
+        <Button variant="primary" onClick={this.props.toggleModal}>
+          Launch demo modal
+        </Button>
 
-export default modal;
+        <Modal
+          show={this.props.openModal}
+          onHide={this.props.toggleModal}
+          animation={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Card>
+            <Card.Img variant="top" src={this.props.data.avatar_url} alt="avatar" height="300px" width="110px" />
+
+            </Card>
+          <ListGroupItem><strong>Name :</strong> {this.props.data.name}</ListGroupItem>  
+           <ListGroupItem><strong>Bio :</strong> {this.props.data.bio}</ListGroupItem>
+           <ListGroupItem><strong>Followers :</strong> :{this.props.data.followers}</ListGroupItem>
+          <ListGroupItem><strong>Following :</strong>{this.props.data.following}</ListGroupItem>
+          <ListGroupItem><strong>Location :</strong>{this.props.data.location}</ListGroupItem>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.props.toggleModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
+}
+export default ModalExample;
